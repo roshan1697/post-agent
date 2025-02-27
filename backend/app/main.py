@@ -23,7 +23,8 @@ class State(BaseModel):
 
 class Base(BaseModel):
     user: str
-llm = ChatGroq(model='deepseek-r1-distill-llama-70b')
+llm = ChatGroq(model='deepseek-r1-distill-llama-70b',
+                streaming=True)
 tool = TavilySearchResults(max_results=2)
 tools = [tool]
 llm_with_tools= llm.bind_tools(tools)
@@ -55,10 +56,11 @@ async def items(message:Base):
         # for value in event.values():
         #     output.append(value["messages"][-1].content)
     for event in events:
+        
         output.append(event['messages'][-1])
 
-
-    return output
+    print(output)
+    return 
 
 
 

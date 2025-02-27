@@ -39,12 +39,14 @@ export default function Home() {
         
       )
       console.log(res.data)
-      const reader = res.data?.content.getReader()
+      const reader = res.data.getReader()
+      console.log(reader)
       if(reader){
         while(true){
           const {done, value} = await reader.read()
           if(done) break
-          setText(prev => prev + new TextDecoder().decode(value))
+          // setText(prev => prev + new TextDecoder().decode(value))
+          console.log(value)
         }
       }
       // setMessages(prevmessages=> [...prevmessages,{role:'chatbot' , content:res.data}])
@@ -156,7 +158,7 @@ export default function Home() {
           </form>
         </div>
       </div>
-      <p>{text}</p>
+      {/* <p>{text}</p> */}
     </div>
   );
 }
